@@ -1,0 +1,25 @@
+{
+  "name": "decoderws",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "start": "node ws.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vladinho/decoderWs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vladinho/decoderWs/issues"
+  },
+  "homepage": "https://github.com/Vladinho/decoderWs#readme",
+  "dependencies": {
+    "bufferutil": "^4.0.7",
+    "express": "^4.18.2",
+    "utf-8-validate": "^6.0.3",
+    "ws": "^8.13.0"
+  }
+}
