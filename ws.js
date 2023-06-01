@@ -13,7 +13,7 @@ class WsProvider {
     }
 
     onConnection = (ws, b) => {
-        ws.send('Welcome to the chat, enjoy 222');
+        ws.send('Welcome!');
         const url_parts =  url.parse(b.url, true);
         const roomId = url_parts.query.roomId;
 
