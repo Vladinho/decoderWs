@@ -6,6 +6,7 @@ class WsProvider {
         if (!WsProvider._instance) {
             this.wss = new WebSocketServer({ port: PORT });
             this.clients = {};
+            this.timeouts = {};
             this.wss.on('connection', this.onConnection)
             WsProvider._instance = this
         }
@@ -13,7 +14,7 @@ class WsProvider {
     }
 
     onConnection = (ws, b) => {
-        ws.send('Welcome!');
+        ws.send('Hello!');
         const url_parts =  url.parse(b.url, true);
         const roomId = url_parts.query.roomId;
 
@@ -23,6 +24,17 @@ class WsProvider {
             } else {
                 this.clients[roomId] = [ws];
             }
+
+            if (this.timeouts[roomId]) {
+                clearTimeout(this.timeouts[roomId]);
+            }
+
+            this.timeouts[roomId] = setTimeout(() => {
+                if (this.clients[roomId]) {
+                    this.clients[roomId].forEach(i => i?.terminate());
+                    delete this.clients[roomId];
+                }
+            }, 1000*60*60*4);
         }
 
         ws.on('message', (messageAsString) => {
