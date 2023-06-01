@@ -35,13 +35,13 @@ class WsProvider {
            if (messageAsString) {
                switch (msg) {
                    case 'update answers':
-                       return this.clients[url_parts.query.roomId]?.forEach(i => i.send('update answers'))
+                       return this.clients[url_parts.query.roomId]?.filter(i => i !== ws).forEach(i => i.send('update answers'));
                    case 'update game':
-                       return this.clients[url_parts.query.roomId]?.forEach(i => i.send('update game'))
+                       return this.clients[url_parts.query.roomId]?.filter(i => i !== ws).forEach(i => i.send('update game'));
                    case 'update room':
-                       return this.clients[url_parts.query.roomId]?.forEach(i => i.send('update room'))
+                       return this.clients[url_parts.query.roomId]?.filter(i => i !== ws).forEach(i => i.send('update room'));
                    default:
-                       console.error('No msg handler!')
+                       console.error('No msg handler!');
                }
            }
         });
